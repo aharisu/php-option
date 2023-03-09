@@ -1,5 +1,5 @@
 {
-    "name": "prewk/option",
+    "name": "aharisu/option",
     "description": "PHP Option object like a Rust language",
     "license": [
         "Apache-2.0",
