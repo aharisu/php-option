@@ -13,12 +13,17 @@ use stdClass;
 final class Some extends stdClass implements Option
 {
     /**
+     * @var T $value
+     */
+    private $value;
+
+    /**
      * @param  T  $value
      * @return Option<T>
      */
-    private function __construct(
-        private readonly mixed $value
-    ) {
+    private function __construct($value)
+    {
+        $this->value = $value;
     }
 
     private function __clone()
@@ -272,12 +277,12 @@ final class Some extends stdClass implements Option
     /**
      * @return T
      */
-    public function current(): mixed
+    public function current()
     {
         return $this->value;
     }
 
-    public function key(): mixed
+    public function key()
     {
         return 0;
     }
