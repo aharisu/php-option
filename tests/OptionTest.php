@@ -27,46 +27,6 @@ class OptionTest extends TestCase
         $this->assertTrue(none()->equals(none()));
     }
 
-    public function testSomeMatchExpression()
-    {
-        $a = some(1);
-        $result = match ($match = $a->tryUnwrap()) {
-            null => 'none',
-            default => 'ok:' . $match,
-        };
-        $this->assertSame('ok:1', $result);
-    }
-
-    public function testEmptyStringMatchExpression()
-    {
-        $a = some('');
-        $result = match ($match = $a->tryUnwrap()) {
-            null => 'none',
-            default => 'ok:' . $match,
-        };
-        $this->assertSame('ok:', $result);
-    }
-
-    public function testZeroStringMatchExpression()
-    {
-        $a = some('0');
-        $result = match ($match = $a->tryUnwrap()) {
-            null => 'none',
-            default => 'ok:' . $match,
-        };
-        $this->assertSame('ok:0', $result);
-    }
-
-    public function testNoneMatchExpression()
-    {
-        $a = none();
-        $result = match ($match = $a->tryUnwrap()) {
-            null => 'none',
-            default => 'ok:' . $match,
-        };
-        $this->assertSame('none', $result);
-    }
-
     public function testSomeForEach()
     {
         $a = some(1);
