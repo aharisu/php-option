@@ -1,0 +1,41 @@
+{
+    "preset": "laravel",
+    "exclude": [
+        "tmp",
+        "vendor",
+        "coverage"
+    ],
+    "rules": {
+         "align_multiline_comment": {
+            "comment_type": "phpdocs_like"
+        },
+        "array_indentation": true,
+        "array_push": true,
+        "array_syntax": true,
+        "binary_operator_spaces": true,
+        "blank_line_after_opening_tag": true,
+        "cast_spaces": {
+            "space": "none"
+        },
+        "clean_namespace": true,
+        "compact_nullable_typehint": true,
+        "concat_space": {
+            "spacing": "one"
+        },
+        "explicit_indirect_variable": true,
+        "explicit_string_variable": true,
+        "function_typehint_space": true,
+        "method_chaining_indentation": true,
+        "new_with_braces": true,
+        "no_whitespace_in_blank_line": true,
+        "operator_linebreak": {
+            "only_booleans": true,
+            "position": "beginning"
+        },
+        "ordered_imports": true,
+        "phpdoc_add_missing_param_annotation": true,
+        "phpdoc_order": true,
+        "phpdoc_single_line_var_spacing": true,
+        "return_type_declaration": true
+    }
+}
