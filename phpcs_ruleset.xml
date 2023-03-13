@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<ruleset name="Drupal7">
+<description>Rules for standard PHP projects</description>
+
+<rule ref="PSR2" />
+
+<exclude-pattern>/vendor/*</exclude-pattern>
+<exclude-pattern>/tmp/*</exclude-pattern>
+
+<rule ref="Generic.Files.LineLength">
+        <properties>
+                <property name="lineLimit" value="160"/>
+                <property name="absoluteLineLimit" value="200"/>
+        </properties>
+</rule>
+
+<rule ref="PSR1.Methods.CamelCapsMethodName.NotCamelCaps">
+        <exclude-pattern>*/tests/*</exclude-pattern>
+</rule>
+</ruleset>

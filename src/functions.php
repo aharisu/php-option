@@ -1,6 +1,6 @@
 <?php
 
-if (!function_exists('some')) {
+if (! function_exists('some')) {
     /**
      * @template T
      *
@@ -13,9 +13,9 @@ if (!function_exists('some')) {
     }
 }
 
-if (!function_exists('none')) {
+if (! function_exists('none')) {
     /**
-     * @return \aharisu\Option\None
+     * @return \aharisu\Option\None<mixed>
      */
     function none()
     {
@@ -23,7 +23,7 @@ if (!function_exists('none')) {
     }
 }
 
-if (!function_exists('nullToNone')) {
+if (! function_exists('toOption')) {
     /**
      * @template T
      *

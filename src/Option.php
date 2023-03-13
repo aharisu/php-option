@@ -7,6 +7,8 @@ use Iterator;
 
 /**
  * @template T
+ *
+ * @extends Iterator<int, T>
  */
 interface Option extends Iterator
 {

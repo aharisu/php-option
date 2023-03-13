@@ -13,7 +13,7 @@ use stdClass;
 final class Some extends stdClass implements Option
 {
     /**
-     * @var T $value
+     * @var T
      */
     private $value;
 
@@ -280,7 +280,7 @@ final class Some extends stdClass implements Option
     /**
      * @return T
      */
-    public function current()
+    public function current(): mixed
     {
         return $this->value;
     }
@@ -288,7 +288,7 @@ final class Some extends stdClass implements Option
     /**
      * @codeCoverageIgnore
      */
-    public function key()
+    public function key(): mixed
     {
         return 0;
     }

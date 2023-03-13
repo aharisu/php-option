@@ -26,7 +26,7 @@ final class None implements Option
      */
     public static function make(): None
     {
-        if (!isset(self::$instance)) {
+        if (! isset(self::$instance)) {
             self::$instance = new None();
         }
 
@@ -267,7 +267,7 @@ final class None implements Option
     /**
      * @codeCoverageIgnore
      */
-    public function current()
+    public function current(): mixed
     {
         throw new Exception('Access the none value');
     }
@@ -275,7 +275,7 @@ final class None implements Option
     /**
      * @codeCoverageIgnore
      */
-    public function key()
+    public function key(): mixed
     {
         throw new Exception('Access the none value');
     }
