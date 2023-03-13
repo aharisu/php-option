@@ -267,7 +267,7 @@ final class None implements Option
     /**
      * @codeCoverageIgnore
      */
-    public function current(): mixed
+    public function current()
     {
         throw new Exception('Access the none value');
     }
@@ -275,7 +275,7 @@ final class None implements Option
     /**
      * @codeCoverageIgnore
      */
-    public function key(): mixed
+    public function key()
     {
         throw new Exception('Access the none value');
     }

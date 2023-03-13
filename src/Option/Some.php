@@ -280,7 +280,7 @@ final class Some extends stdClass implements Option
     /**
      * @return T
      */
-    public function current(): mixed
+    public function current()
     {
         return $this->value;
     }
@@ -288,7 +288,7 @@ final class Some extends stdClass implements Option
     /**
      * @codeCoverageIgnore
      */
-    public function key(): mixed
+    public function key()
     {
         return 0;
     }
