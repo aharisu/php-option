@@ -28,11 +28,12 @@ if (!function_exists('nullToNone')) {
      * @template T
      *
      * @param  T|null  $value
+     * @param  mixed|null  $noneValue
      * @return \aharisu\Option<T>
      */
-    function nullToNone($value)
+    function toOption($value, $noneValue = null)
     {
-        if ($value === null) {
+        if ($value === $noneValue) {
             return \aharisu\Option\None::make();
         } else {
             return \aharisu\Option\Some::make($value);

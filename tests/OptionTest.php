@@ -2,6 +2,7 @@
 
 namespace Tests\Unit;
 
+use Exception;
 use PHPUnit\Framework\TestCase;
 
 class OptionTest extends TestCase
@@ -11,9 +12,17 @@ class OptionTest extends TestCase
         $this->assertTrue(some(1)->equals(some(1)));
         $this->assertFalse(some(1)->equals(some(2)));
 
-        //以下の二つはPHPStanレベルで型エラーになる
+        //following are type-level errors in PHPStan
         $this->assertFalse(some(1)->equals(some('1'))); //@phpstan-ignore-line
         $this->assertFalse(some(1)->equals(some(1.0))); //@phpstan-ignore-line
+
+        $h = $this->hoge();
+        $b = toOption($h);
+    }
+
+    public function hoge(): int|null
+    {
+        return null;
     }
 
     public function testEqualsSomeNone()
@@ -25,6 +34,90 @@ class OptionTest extends TestCase
     public function testEqualsNoneNone()
     {
         $this->assertTrue(none()->equals(none()));
+    }
+
+    public function testEqualsSomeNoWrappedValue()
+    {
+        $this->assertTrue(some(1)->equals(1));
+        $this->assertFalse(some(1)->equals(2));
+
+        //following are type-level errors in PHPStan
+        $this->assertFalse(some(1)->equals('1')); //@phpstan-ignore-line
+        $this->assertFalse(some(1)->equals(1.0)); //@phpstan-ignore-line
+    }
+
+    public function testToOption()
+    {
+        $x = toOption(1);
+        $this->assertTrue($x->isSome());
+        $this->assertFalse($x->isNone());
+
+        $x = toOption(null);
+        $this->assertFalse($x->isSome());
+        $this->assertTrue($x->isNone());
+
+        $x = toOption(null, 1);
+        $this->assertTrue($x->isSome());
+        $this->assertFalse($x->isNone());
+    }
+
+    public function testSomeUnwrap()
+    {
+        $x = some(1);
+        $a = $x->unwrap();
+        $this->assertSame(1, $a);
+    }
+
+    public function testNoneUnwrap()
+    {
+        $this->expectException(Exception::class);
+
+        $x = none();
+        $a = $x->unwrap();
+    }
+
+    public function testNoneUnwrapUnchecked()
+    {
+        $this->expectException(Exception::class);
+
+        $x = none();
+        $a = $x->unwrapUnchecked();
+    }
+
+    public function testTryUnwrap()
+    {
+        $x = some(1);
+        if (null !== $a = $x->tryUnwrap()) {
+            $result = 'same';
+        } else {
+            $result = 'none';
+        }
+        $this->assertSame('same', $result);
+
+        $x = none();
+        if (null !== $a = $x->tryUnwrap()) {
+            $result = 'same';
+        } else {
+            $result = 'none';
+        }
+        $this->assertSame('none', $result);
+    }
+
+    public function testSomeThen()
+    {
+        $x = some(1);
+        $result = 'none';
+        $x->someThen(function ($a) use (&$result) {
+            $result = 'some';
+        });
+        $this->assertSame('some', $result);
+
+        $x = none();
+        $result = 'none';
+        $x->someThen(function ($a) use (&$result) {
+            $result = 'some';
+        });
+        $this->assertSame('none', $result);
     }
 
     public function testSomeForEach()
@@ -171,7 +264,7 @@ class OptionTest extends TestCase
         $isEven = fn ($n) => $n % 2 === 0;
 
         $this->assertTrue(none()->equals(none()->filter($isEven)));
-        $this->assertTrue(none()->equals(none()->filter($isEven)));
+        $this->assertTrue(none()->equals(some(3)->filter($isEven)));
         $this->assertTrue(some(4)->equals(some(4)->filter($isEven)));
     }
 }

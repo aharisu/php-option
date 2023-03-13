@@ -26,6 +26,9 @@ final class Some extends stdClass implements Option
         $this->value = $value;
     }
 
+    /**
+     * @codeCoverageIgnore
+     */
     private function __clone()
     {
     }
@@ -277,12 +280,15 @@ final class Some extends stdClass implements Option
     /**
      * @return T
      */
-    public function current()
+    public function current(): mixed
     {
         return $this->value;
     }
 
-    public function key()
+    /**
+     * @codeCoverageIgnore
+     */
+    public function key(): mixed
     {
         return 0;
     }
