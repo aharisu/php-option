@@ -12,12 +12,18 @@ use Exception;
  */
 final class None implements Option
 {
+    /**
+     * @var None<T>
+     */
     private static None $instance;
 
     private function __construct()
     {
     }
 
+    /**
+     * @return None<T>
+     */
     public static function make(): None
     {
         if (!isset(self::$instance)) {
@@ -27,6 +33,9 @@ final class None implements Option
         return self::$instance;
     }
 
+    /**
+     * @codeCoverageIgnore
+     */
     private function __clone()
     {
     }
@@ -255,16 +264,25 @@ final class None implements Option
     // Because we do not want to consume memory for functions that are used infrequently.
     //private bool $iteratorFirst;
 
-    public function current(): mixed
+    /**
+     * @codeCoverageIgnore
+     */
+    public function current()
     {
         throw new Exception('Access the none value');
     }
 
-    public function key(): mixed
+    /**
+     * @codeCoverageIgnore
+     */
+    public function key()
     {
         throw new Exception('Access the none value');
     }
 
+    /**
+     * @codeCoverageIgnore
+     */
     public function next(): void
     {
     }
