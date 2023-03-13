@@ -15,14 +15,6 @@ class OptionTest extends TestCase
         //following are type-level errors in PHPStan
         $this->assertFalse(some(1)->equals(some('1'))); //@phpstan-ignore-line
         $this->assertFalse(some(1)->equals(some(1.0))); //@phpstan-ignore-line
-
-        $h = $this->hoge();
-        $b = toOption($h);
-    }
-
-    public function hoge(): int|null
-    {
-        return null;
     }
 
     public function testEqualsSomeNone()
