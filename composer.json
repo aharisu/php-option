@@ -1,6 +1,7 @@
 {
     "name": "aharisu/option",
     "description": "PHP Option object like a Rust language",
+    "keywords": ["php", "option", "type", "null"],
     "license": [
         "Apache-2.0",
         "MIT"
