@@ -24,19 +24,65 @@ $none = none();
 if ($some->isSome()) {
     $v = $some->unwrap();
 }
-
-if (($v = $some->tryUnwrap()) !== null) {
+if ($none->isNone()) {
     //do something
+}
+
+if (null != $v = $some->tryUnwrap()) {
+    //do something
+    print_r($v);
 }
 
 $some->someThen(function ($v) {
     //do something
+    print_r($v);
 });
 
 $v2 = $none->unwrapOr(2);
 $k = 10;
 $v3 = $none->unwrapOrElse(fn () => 2 * $k);
 
+// true
+if (some(1)->equals(1)) {
+}
+if (some(1)->equals(some(1))) {
+}
+// false
+if (none()->equals(null)) {
+}
+
+// false and type mismatch warning
+if (some(1)->equals(1.0)) {
+}
+// false and type mismatch warning
+if (some(1)->equals('1')) {
+}
+```
+
+## Using class property
+
+```php
+use aharisu\Option;
+
+class ValueType
+{
+    /**
+     * @param Option<string> $text
+     * @param Option<int>    $value
+     */
+    public function __construct(
+        public readonly int $id,
+        public readonly Option $text,
+        public readonly Option $value,
+    ) {
+    }
+}
+
+new ValueType(
+    1,
+    toOption('text'), //some
+    toOption(null),   //none
+);
 ```
 
 ## License
