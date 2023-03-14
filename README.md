@@ -3,6 +3,7 @@
 <a href="LICENSE-APACHE"><img src="https://img.shields.io/badge/license-Apache%202.0-brightgreen.svg?style=flat-square" alt="Software License"></img></a>
 <a href="LICENSE-MIT2"><img src="https://img.shields.io/badge/license-MIT2-brightgreen.svg?style=flat-square" alt="Software License"></img></a>
 <a href="https://github.com/aharisu/php-option/actions"><img src="https://github.com/aharisu/php-option/actions/workflows/tests.yml/badge.svg" alt="Build Status"></img></a>
+<a href='https://coveralls.io/github/aharisu/php-option'><img src='https://coveralls.io/repos/github/aharisu/php-option/badge.svg' alt='Coverage Status' /></a>
 <a href="https://github.com/aharisu/php-option/releases"><img src="https://img.shields.io/github/release/aharisu/php-option.svg?style=flat-square" alt="Latest Version"></img></a>
 </p>
 
