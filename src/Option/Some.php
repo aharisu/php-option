@@ -4,6 +4,7 @@ namespace aharisu\Option;
 
 use aharisu\Option;
 use stdClass;
+use Traversable;
 
 /**
  * @template T
@@ -265,46 +266,11 @@ final class Some extends stdClass implements Option
     }
 
     //
-    // implements Iterator
+    // implements IteratorAggregate
     //
 
-    //
-    // NOTE
-    // we need the Iterator feature in the first place?
-
-    // NOTE
-    // Intentionally dynamic property.
-    // Because we do not want to consume memory for functions that are used infrequently.
-    //private bool $iteratorFirst;
-
-    /**
-     * @return T
-     */
-    public function current(): mixed
+    public function getIterator(): Traversable
     {
-        return $this->value;
-    }
-
-    /**
-     * @codeCoverageIgnore
-     */
-    public function key(): mixed
-    {
-        return 0;
-    }
-
-    public function next(): void
-    {
-        $this->iteratorFirst = false;
-    }
-
-    public function rewind(): void
-    {
-        $this->iteratorFirst = true;
-    }
-
-    public function valid(): bool
-    {
-        return  $this->iteratorFirst && $this->isSome();
+        yield $this->value;
     }
 }
