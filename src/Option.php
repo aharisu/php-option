@@ -55,8 +55,9 @@ interface Option extends IteratorAggregate
 
     /**
      * @param  callable(T):mixed  $callback
+     * @return void
      */
-    public function someThen($callback): void;
+    public function someThen($callback);
 
     /**
      * Maps an Option<T> to Option<U> by applying a function to a contained value.

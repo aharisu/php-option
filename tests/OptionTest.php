@@ -141,16 +141,24 @@ class OptionTest extends TestCase
     public function testUnwrapOrElse()
     {
         $k = 10;
-        $this->assertSame(4, some(4)->unwrapOrElse(fn () => 2 * $k));
-        $this->assertSame(20, none()->unwrapOrElse(fn () => 2 * $k));
+        $func = function () use ($k) {
+            return 2 * $k;
+        };
+
+        $this->assertSame(4, some(4)->unwrapOrElse($func));
+        $this->assertSame(20, none()->unwrapOrElse($func));
     }
 
     public function testMap()
     {
-        $maybeSomeString = some('Hello, World!');
-        $maybeSomeLen = $maybeSomeString->map(fn ($str) => mb_strlen($str));
+        $func = function ($str) {
+            return mb_strlen($str);
+        };
 
-        $maybeNoneLen = none()->map(fn ($str) => mb_strlen($str));
+        $maybeSomeString = some('Hello, World!');
+        $maybeSomeLen = $maybeSomeString->map($func);
+
+        $maybeNoneLen = none()->map($func);
 
         $this->assertTrue(some(13)->equals($maybeSomeLen));
         $this->assertTrue(none()->equals($maybeNoneLen));
@@ -158,22 +166,32 @@ class OptionTest extends TestCase
 
     public function testMapOr()
     {
+        $func = function ($v) {
+            return mb_strlen($v);
+        };
+
         $x = some('foo');
-        $this->assertSame(3, $x->mapOr(42, fn ($v) => mb_strlen($v)));
+        $this->assertSame(3, $x->mapOr(42, $func));
 
         $x = none();
-        $this->assertSame(42, $x->mapOr(42, fn ($v) => mb_strlen($v)));
+        $this->assertSame(42, $x->mapOr(42, $func));
     }
 
     public function testMapOrElse()
     {
         $k = 21;
+        $funcDefault = function () use ($k) {
+            return 2 * $k;
+        };
+        $funcElse = function ($v) {
+            return mb_strlen($v);
+        };
 
         $x = some('foo');
-        $this->assertSame(3, $x->mapOrElse(fn () => 2 * $k, fn ($v) => mb_strlen($v)));
+        $this->assertSame(3, $x->mapOrElse($funcDefault, $funcElse));
 
         $x = none();
-        $this->assertSame(42, $x->mapOrElse(fn () => 2 * $k, fn ($v) => mb_strlen($v)));
+        $this->assertSame(42, $x->mapOrElse($funcDefault, $funcElse));
     }
 
     public function testAnd()
@@ -197,7 +215,9 @@ class OptionTest extends TestCase
 
     public function testAndThen()
     {
-        $then = fn ($x) => $x % 2 === 0 ? some($x * 2) : none();
+        $then = function ($x) {
+            return $x % 2 === 0 ? some($x * 2) : none();
+        };
         $this->assertTrue(some(4)->equals(some(2)->andThen($then)));
         $this->assertTrue(none()->equals(some(3)->andThen($then)));
         $this->assertTrue(none()->equals(none()->andThen($then)));
@@ -224,8 +244,12 @@ class OptionTest extends TestCase
 
     public function testOrElse()
     {
-        $nobody = fn () => none();
-        $vikings = fn () => some('vikings');
+        $nobody = function () {
+            return none();
+        };
+        $vikings = function () {
+            return some('vikings');
+        };
 
         $this->assertTrue(some('barbarians')->equals(some('barbarians')->orElse($vikings)));
         $this->assertTrue(some('vikings')->equals(none()->orElse($vikings)));
@@ -253,7 +277,9 @@ class OptionTest extends TestCase
 
     public function testFilter()
     {
-        $isEven = fn ($n) => $n % 2 === 0;
+        $isEven = function ($n) {
+            return $n % 2 === 0;
+        };
 
         $this->assertTrue(none()->equals(none()->filter($isEven)));
         $this->assertTrue(none()->equals(some(3)->filter($isEven)));
