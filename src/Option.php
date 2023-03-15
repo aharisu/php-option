@@ -3,14 +3,14 @@
 namespace aharisu;
 
 use Exception;
-use Iterator;
+use IteratorAggregate;
 
 /**
  * @template T
  *
- * @extends Iterator<int, T>
+ * @extends IteratorAggregate<int, T>
  */
-interface Option extends Iterator
+interface Option extends IteratorAggregate
 {
     public function isSome(): bool;
 

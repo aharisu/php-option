@@ -3,7 +3,9 @@
 namespace aharisu\Option;
 
 use aharisu\Option;
+use EmptyIterator;
 use Exception;
+use Traversable;
 
 /**
  * @template T
@@ -252,47 +254,10 @@ final class None implements Option
     }
 
     //
-    // implements Iterator
+    // implements IteratorAggregate
     //
-
-    //
-    // NOTE
-    // we need the Iterator feature in the first place?
-
-    // NOTE
-    // Intentionally dynamic property.
-    // Because we do not want to consume memory for functions that are used infrequently.
-    //private bool $iteratorFirst;
-
-    /**
-     * @codeCoverageIgnore
-     */
-    public function current(): mixed
+    public function getIterator(): Traversable
     {
-        throw new Exception('Access the none value');
-    }
-
-    /**
-     * @codeCoverageIgnore
-     */
-    public function key(): mixed
-    {
-        throw new Exception('Access the none value');
-    }
-
-    /**
-     * @codeCoverageIgnore
-     */
-    public function next(): void
-    {
-    }
-
-    public function rewind(): void
-    {
-    }
-
-    public function valid(): bool
-    {
-        return false;
+        return new EmptyIterator();
     }
 }
