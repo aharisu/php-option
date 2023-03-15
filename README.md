@@ -7,6 +7,19 @@
 <a href="https://github.com/aharisu/php-option/releases"><img src="https://img.shields.io/github/release/aharisu/php-option.svg?style=flat-square" alt="Latest Version"></img></a>
 </p>
 
+## Version information
+It will work with both PHP 7.x and PHP 8.x.<br />
+Tested with the following PHP versions
+- 7.0
+- 7.1
+- 7.2
+- 7.3
+- 7.4
+- 8.0
+- 8.1
+- 8.2
+
+
 ## Installation
 
 ```php
