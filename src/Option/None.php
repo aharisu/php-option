@@ -17,7 +17,7 @@ final class None implements Option
     /**
      * @var None<T>
      */
-    private static None $instance;
+    private static $instance;
 
     private function __construct()
     {
@@ -28,7 +28,7 @@ final class None implements Option
      */
     public static function make(): None
     {
-        if (! isset(self::$instance)) {
+        if (self::$instance === null) {
             self::$instance = new None();
         }
 
@@ -108,8 +108,9 @@ final class None implements Option
 
     /**
      * @param  callable(T):mixed  $callback
+     * @return void
      */
-    public function someThen($callback): void
+    public function someThen($callback)
     {
         //do nothing
     }

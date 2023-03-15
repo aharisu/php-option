@@ -105,8 +105,9 @@ final class Some extends stdClass implements Option
 
     /**
      * @param  callable(T):mixed  $callback
+     * @return void
      */
-    public function someThen($callback): void
+    public function someThen($callback)
     {
         $callback($this->value);
     }
