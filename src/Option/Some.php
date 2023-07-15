@@ -85,6 +85,16 @@ final class Some extends stdClass implements Option
     }
 
     /**
+     * Returns the contained Some value or null.
+     *
+     * @return T|null
+     */
+    public function unwrapOrNull()
+    {
+        return $this->value;
+    }
+
+    /**
      * Returns the contained Some value or computes it from a closure.
      *
      * @param  callable():T  $f

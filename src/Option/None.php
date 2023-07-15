@@ -88,6 +88,16 @@ final class None implements Option
     }
 
     /**
+     * Returns the contained Some value or null.
+     *
+     * @return T|null
+     */
+    public function unwrapOrNull()
+    {
+        return null;
+    }
+
+    /**
      * Returns the contained Some value or computes it from a closure.
      *
      * @param  callable():T  $f

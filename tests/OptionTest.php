@@ -138,6 +138,12 @@ class OptionTest extends TestCase
         $this->assertSame('bike', none()->unwrapOr('bike'));
     }
 
+    public function testUnwrapOrNull()
+    {
+        $this->assertSame('car', some('car')->unwrapOrNull());
+        $this->assertNull(none()->unwrapOrNull());
+    }
+
     public function testUnwrapOrElse()
     {
         $k = 10;

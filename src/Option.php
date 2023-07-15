@@ -41,6 +41,13 @@ interface Option extends IteratorAggregate
     public function unwrapOr($default);
 
     /**
+     * Returns the contained Some value or null.
+     *
+     * @return T|null
+     */
+    public function unwrapOrNull();
+
+    /**
      * Returns the contained Some value or computes it from a closure.
      *
      * @param  callable():T  $f
